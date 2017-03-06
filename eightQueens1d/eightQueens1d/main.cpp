@@ -9,18 +9,18 @@
 
 using namespace std;
 
-void findAllSolutions(int boardSize) {
+void findAllSolutions() {
     
-    int board[boardSize], column = 0, i = 0, solutionsFound = 0;
+    int board[8], column = 0, i = 0, solutionsFound = 0;
     board[0] = 0;
 nextColumn:
     column++;
-    if (column == boardSize)
+    if (column == 8)
         goto print;
     board[column] = -1;
 nextRow:
     board[column]++;
-    if (board[column] == boardSize)
+    if (board[column] == 8)
         goto backtrack;
     // tests
     for (i = 0; i < column; i++) {
@@ -37,11 +37,11 @@ backtrack:
     goto nextRow;
 print:
     cout << "Solution number " << ++solutionsFound << " is: " << endl;
-    for(i = 0; i < boardSize; i++)
+    for(i = 0; i < 4; i++)
         cout << board[i] << " ";
     cout << endl << endl;
-    for (i = 0; i < boardSize; i++) {
-        for (int j = 0; j < boardSize; j++) {
+    for (i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
             if (i == board[j])
                 cout << "1 ";
             else cout << "0 ";
@@ -53,10 +53,10 @@ print:
 }
 
 int main() {
-    int input = 8;
-    cout << "Enter the board size you want to display: ";
-    cin >> input;
-    findAllSolutions(input);
+//    int input = 8;
+//    cout << "Enter the board size you want to display: ";
+//    cin >> input;
+    findAllSolutions();
 }
 
 

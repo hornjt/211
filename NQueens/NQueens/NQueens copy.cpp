@@ -1,7 +1,9 @@
-// Horn, Jonathan
-// CS211  Section 52B Homework 5
-// Eight Queens - 1 Dimen Array Without GOTO
-//  Created by Jon Horn on 2/24/17
+//
+//  main.cpp
+//  NQueens
+//
+//  Created by Jon Horn on 2/24/17.
+//  Copyright © 2017 Jon Horn. All rights reserved.
 //
 
 #include <iostream>
