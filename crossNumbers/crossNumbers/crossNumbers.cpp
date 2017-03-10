@@ -13,16 +13,8 @@ using namespace std;
 
 bool ok(int board[], int column){
     
-    int board0 = board[0];
-    int board1 = board[1];
-    int board2 = board[2];
-    int board3 = board[3];
-    int board4 = board[4];
-    int board5 = board[5];
-    int board6 = board[6];
-    int board7 = board[7];
-    
-    /* board layout
+    /* 
+     board layout
         -------
        | 1 | 4 |
    | 0 | 2 | 5 | 7 |
@@ -45,15 +37,11 @@ bool ok(int board[], int column){
     int iterator = 0;
     while (testingBoard[column][iterator] != -1) {
         int boardIndexToCheck = testingBoard[column][iterator];
-        int testingValue = board[boardIndexToCheck];
-        int boardValueAtACurrCol = board[column];
+        int currIndexValue = board[column];
         
-        
-        if (testingValue == boardValueAtACurrCol ||
-            board[boardIndexToCheck] ==  boardValueAtACurrCol - 1 ||
-            board[boardIndexToCheck] ==  boardValueAtACurrCol + 1) {
-            
-//            cout << "match found" << endl;
+        // tests neighboring boxes + - 1
+        if (board[boardIndexToCheck] ==  currIndexValue - 1 ||
+            board[boardIndexToCheck] ==  currIndexValue + 1) {
             return false;
         }
         iterator++;
@@ -73,7 +61,6 @@ void backtrack(int &col){
         //set stop point
         exit(0);
     }
-    
 }
 
 void print(int board[]) {
@@ -84,28 +71,21 @@ void print(int board[]) {
 
 int main(){
     
-    int boardSize = 8, numOfSolutions = 0;
+    int numOfSolutions = 0;
     /*board setup */
     int board[8] = {0,0,0,0,0,0,0,0};
     int column = 0;
     
-    board[0] = 0;
-    
-    
     bool from_backtrack = false;
     while (true) {
-        while (column < boardSize) {
-            if (!from_backtrack) {
-                
-                /*column section*/
+        while (column < 8) {
+            if (!from_backtrack)
                 board[column] = -1;
-                from_backtrack = true;
-                
-            }
-            while (board[column] < boardSize){
+            
+            while (board[column] < 8){
                 /*row section*/
                 board[column]++;
-                if (board[column] == boardSize) {
+                if (board[column] == 8) {
                     from_backtrack = true;
                     backtrack(column);
                     break;
@@ -117,9 +97,8 @@ int main(){
                     break;
                 }
             }
-            
         }
-//        print(board, boardSize, ++numOfSolutions) ;/*print section*/
+        
         print(board);
         from_backtrack = true;
         backtrack(column);
