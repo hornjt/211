@@ -34,19 +34,20 @@ bool ok(int board[], int column){
         {4, 5, 6, -1}       // 7
     };
 
-    int iterator = 0;
-    while (testingBoard[column][iterator] != -1) {
-        int boardIndexToCheck = testingBoard[column][iterator];
+    int testBoardIterator = 0;
+    while (testingBoard[column][testBoardIterator] != -1) {
+        int boardIndexToCheck = testingBoard[column][testBoardIterator];
         int currIndexValue = board[column];
         
-        // tests neighboring boxes + - 1
+        // tests neighboring boxes + - 1 for current column value
         if (board[boardIndexToCheck] ==  currIndexValue - 1 ||
             board[boardIndexToCheck] ==  currIndexValue + 1) {
             return false;
         }
-        iterator++;
+        testBoardIterator++;
     }
     
+    // check for duplicates; might be a better way
     for (int i = 0; i < column; i++)
         if (board[i] == board[column])
             return false;
