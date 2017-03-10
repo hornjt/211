@@ -1,15 +1,12 @@
 //
-//  main.cpp
-//  crossNumbers
+//  crossNumbers.cpp
+//  HW7 crossNumbers - Section 52B
 //
 //  Created by Jon Horn on 3/8/17.
-//  Copyright © 2017 Jon Horn. All rights reserved.
 //
 
 #include <iostream>
 using namespace std;
-
-
 
 bool ok(int board[], int column){
     
@@ -68,11 +65,28 @@ void print(int board[]) {
     for(int i = 0; i < 8; i++)
         cout << board[i] << " ";
     cout << endl;
+    
+    /*
+     board layout
+     -------
+     | 1 | 4 |
+ | 0 | 2 | 5 | 7 |
+     | 3 | 6 |
+     -------
+     */
+    
+    cout << "    -----" << endl;
+    cout << "    |" << board[1] << "|"  << board[4] << "|" << endl;
+    cout << "  ---------" << endl;
+    cout <<"  |" << board[0] << "|" << board[2] << "|"  << board[5] << "|" << board[7] << "|" << endl;
+    cout << "  ---------" << endl;
+    cout << "    |" << board[3] << "|"  << board[6] << "|" << endl;
+    cout << "    -----" << endl << endl;
 }
 
 int main(){
     
-    int numOfSolutions = 0;
+//    int numOfSolutions = 0;
     /*board setup */
     int board[8] = {0,0,0,0,0,0,0,0};
     int column = 0;
