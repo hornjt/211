@@ -10,6 +10,15 @@ using namespace std;
 bool ok(int board[], int column){
     
     // tests
+    int board0 = board[0];
+    int board1 = board[1];
+    int board2 = board[2];
+    int board3 = board[3];
+    int board4 = board[4];
+    int board5 = board[5];
+    int board6 = board[6];
+    int board7 = board[7];
+    
     for (int i = 0; i < column; i++) {
         int deltaX = column - i;
         int deltaY = board[column] - board[i];
