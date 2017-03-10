@@ -9,37 +9,61 @@
 #include <iostream>
 using namespace std;
 
+
+
 bool ok(int board[], int column){
+    
+    int board0 = board[0];
+    int board1 = board[1];
+    int board2 = board[2];
+    int board3 = board[3];
+    int board4 = board[4];
+    int board5 = board[5];
+    int board6 = board[6];
+    int board7 = board[7];
     
     /* board layout
         -------
-       | 2 | 5 |
-   | 1 | 3 | 6 | 8 |
-       | 4 | 7 |
+       | 1 | 4 |
+   | 0 | 2 | 5 | 7 |
+       | 3 | 6 |
         -------
      */
     
-    int testingBoard[7][5] =
+    int testingBoard[8][5] =
     {
-        {1, -1},            // 2
-        {1, 2, -1},         // 3
-        {1, 3, -1},         // 4
-        {2, 3, -1},         // 5
-        {2, 3, 4, 5, -1},   // 6
-        {3, 4, 6, -1},      // 7
-        {5, 6, 7, -1}       // 8
+        {-1},               // 0
+        {0, -1},            // 1
+        {0, 1, -1},         // 2
+        {0, 2, -1},         // 3
+        {1, 2, -1},         // 4
+        {1, 2, 3, 4, -1},   // 5
+        {2, 3, 5, -1},      // 6
+        {4, 5, 6, -1}       // 7
     };
+
+    int iterator = 0;
+    while (testingBoard[column][iterator] != -1) {
+        int boardIndexToCheck = testingBoard[column][iterator];
+        int testingValue = board[boardIndexToCheck];
+        int boardValueAtACurrCol = board[column];
+        
+        
+        if (testingValue == boardValueAtACurrCol ||
+            board[boardIndexToCheck] ==  boardValueAtACurrCol - 1 ||
+            board[boardIndexToCheck] ==  boardValueAtACurrCol + 1) {
+            
+//            cout << "match found" << endl;
+            return false;
+        }
+        iterator++;
+    }
     
-//    // tests
-//    for (int i = 0; i < column; i++) {
-//        int deltaX = column - i;
-//        int deltaY = board[column] - board[i];
-//        if (board[i] == board[column] || deltaX == abs(deltaY))
-//            return false;
-//    }
-//    return true;
+    for (int i = 0; i < column; i++)
+        if (board[i] == board[column])
+            return false;
     
-    return false;
+    return true;
 }
 
 void backtrack(int &col){
@@ -51,29 +75,22 @@ void backtrack(int &col){
     }
     
 }
-void print(int board[], int numOfColumns, int numOfSolutions) {
-    int i = 0, j = 0;
-    cout << "Solution number " << numOfSolutions << " is: " << endl;
-    for(int i = 0; i < numOfColumns; i++)
+
+void print(int board[]) {
+    for(int i = 0; i < 8; i++)
         cout << board[i] << " ";
-    cout << endl << endl;
-    for (i = 0; i < numOfColumns; i++) {
-        for (j = 0; j < numOfColumns; j++) {
-            if (i == board[j])
-                cout << "1 ";
-            else cout << "0 ";
-        }
-        cout << endl;
-    }
     cout << endl;
 }
+
 int main(){
     
     int boardSize = 8, numOfSolutions = 0;
     /*board setup */
-    int board[boardSize], column = 0;
+    int board[8] = {0,0,0,0,0,0,0,0};
+    int column = 0;
     
     board[0] = 0;
+    
     
     bool from_backtrack = false;
     while (true) {
@@ -102,7 +119,8 @@ int main(){
             }
             
         }
-        print(board, boardSize, ++numOfSolutions) ;/*print section*/
+//        print(board, boardSize, ++numOfSolutions) ;/*print section*/
+        print(board);
         from_backtrack = true;
         backtrack(column);
     }
