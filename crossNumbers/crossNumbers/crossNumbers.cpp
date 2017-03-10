@@ -19,36 +19,36 @@ bool ok(int board[], int column){
         -------
      */
     
-    int testingBoard[8][5] =
+    int testingBoard[8][7] =
     {
-        {-1},               // 0
-        {0, -1},            // 1
-        {0, 1, -1},         // 2
-        {0, 2, -1},         // 3
-        {1, 2, -1},         // 4
-        {1, 2, 3, 4, -1},   // 5
-        {2, 3, 5, -1},      // 6
-        {4, 5, 6, -1}       // 7
+        {-1, -1, -1, -1, -1, -1, -1},   // 0
+        {0, -1, -1, -1, -1, -1, -1},    // 1
+        {0, 1, -1, -1, -1, -1, -1},     // 2
+        {0, 2, -1, -1, -1, -1, -1},     // 3
+        {1, 2, -1, -1, -1, -1, -1},     // 4
+        {1, 2, 3, 4, -1, -1, -1},       // 5
+        {2, 3, 5, -1, -1, -1, -1},      // 6
+        {4, 5, 6, -1, -1, -1, -1}       // 7
     };
-
-    int testBoardIterator = 0;
-    while (testingBoard[column][testBoardIterator] != -1) {
-        int boardIndexToCheck = testingBoard[column][testBoardIterator];
-        int currIndexValue = board[column];
-        
-        // tests neighboring boxes + - 1 for current column value
-        if (board[boardIndexToCheck] ==  currIndexValue - 1 ||
-            board[boardIndexToCheck] ==  currIndexValue + 1) {
-            return false;
-        }
-        testBoardIterator++;
-    }
     
-    // check for duplicates; might be a better way
-    for (int i = 0; i < column; i++)
+    // check if value has already been used
+    for (int i = 0; i < column; i++) {
         if (board[i] == board[column])
             return false;
-    
+        
+        // since unique value, check neighbors
+        if (testingBoard[column][i] == -1)
+            break;
+        else {
+            int indexOfNeighbor = testingBoard[column][i];
+            int valueAtNeighbor = board[column];
+            
+            // tests neighboring boxes + or - 1 for current column value
+            if (board[indexOfNeighbor] == valueAtNeighbor - 1 ||
+                board[indexOfNeighbor] == valueAtNeighbor + 1)
+                    return false;
+        }
+    }
     return true;
 }
 
@@ -65,15 +65,6 @@ void print(int board[]) {
     for(int i = 0; i < 8; i++)
         cout << board[i] << " ";
     cout << endl;
-    
-    /*
-     board layout
-     -------
-     | 1 | 4 |
- | 0 | 2 | 5 | 7 |
-     | 3 | 6 |
-     -------
-     */
     
     cout << "    -----" << endl;
     cout << "    |" << board[1] << "|"  << board[4] << "|" << endl;
