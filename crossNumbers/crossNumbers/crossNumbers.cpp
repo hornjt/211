@@ -37,9 +37,7 @@ bool ok(int board[], int column){
             return false;
         
         // since unique value, check neighbors
-        if (testingBoard[column][i] == -1)
-            break;
-        else {
+        if (testingBoard[column][i] != -1) {   //
             int indexOfNeighbor = testingBoard[column][i];
             int valueAtNeighbor = board[column];
             
