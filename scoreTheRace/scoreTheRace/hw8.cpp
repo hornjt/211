@@ -9,18 +9,29 @@
 using namespace std;
 
 // return smallest value != 0
-bool minValueNotZero(int a, int b) {
-    return a != 0 && a < b;
+int minElementNotEqualZero(int array[]) {
+    int min = 0;
+    
+    // find the first non zero
+    if (array[0] == 0)
+        while (array[min] == 0)
+            min++;
+    
+    for (int i = 0; i < 92; i++)
+        if (array[i] != 0 && array[i] < array[min])
+                min = i;
+
+    return min;
 }
 
 int main() {
     string input;
     
     // array to track the score each runner generates
-    int scoreKeeper[91] = {0}, teamSize[26], asciiVal = 0;
     bool validInput = true, teamSizesEqual = true;
     
-    while (validInput || input != "DONE") {
+    while (input != "DONE") {
+        int scoreKeeper[91] = {0}, teamSize[26] = {0}, asciiVal = 0, numOfTeams = 0, minTeamSize = 0;
         cout << "Enter the race" << endl;
         cin >> input;
         transform(input.begin(), input.end(),input.begin(), ::toupper);
@@ -35,14 +46,35 @@ int main() {
             scoreKeeper[asciiVal] += (i + 1);
         }
         
-        // check if teams are of equal size
-        teamSizesEqual =
-            (*max_element(teamSize, teamSize + 26)) ==
-            (*min_element(teamSize, teamSize + 26, minValueNotZero));
-        cout << teamSizesEqual;
+        // counts the number of teammates per race
+        for (int i = 0; i < 26; i++)
+            if (teamSize[i] != 0)
+                numOfTeams++;
+        
+        minTeamSize = teamSize[minElementNotEqualZero(teamSize)];        // test if both teams are equal size
+        teamSizesEqual = (*max_element(teamSize, teamSize + 26)) == minTeamSize;
+        
         if (!teamSizesEqual) {
             validInput = false;
             cout << "Teams must be of equal size" << endl;
+        } else {
+            cout << "There are " << numOfTeams << " teams." << endl;
+            cout << "Each team has " << teamSize[0] << " runners." << endl;
+            cout << "Team       Score" << endl;
+            
+            for (int i = 0; i < 91; i++) {
+
+                if (teamSize[i] != 0) {
+//                    // use the index of teamSize array to get char ascii code
+                    char team = (char)i + 65;
+                    double score = (double)scoreKeeper[i + 65] / (double)teamSize[i];
+                    cout << team << "          " << score << endl;
+                }
+            }
+
+            char winningTeam = (char)minElementNotEqualZero(scoreKeeper);
+//            cout << winningTeam;
+            cout << "The winning team is team " << winningTeam << endl;
         }
     }
     return 0;
