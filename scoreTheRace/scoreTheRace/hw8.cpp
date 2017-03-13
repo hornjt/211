@@ -8,6 +8,14 @@
 #include <iostream>
 using namespace std;
 
+bool greaterThan(int a, int b) {
+    return a < b;
+}
+
+bool lessThan(int a, int b) {
+    return a < b;
+}
+
 // return smallest team size != 0
 // column represents whether we are testing the team score or number of team members
 int findSmallest(int array[26][2], int column) {
@@ -36,6 +44,9 @@ int findLargest(int array[26][2]) {
     
     return max;
 }
+
+//typedef int (*FUNC)(int);
+//int compareValues(FUNC, int a, int b);
 
 int main() {
     string input;
@@ -81,6 +92,7 @@ int main() {
             cout << "Each team has " << maxTeamSize << " runners." << endl;
             cout << "Team       Score" << endl;
             
+            // test if letter was scored and print char version
             for (int i = 0; i < 26; i++) {
                 if (scoringTable[i][1] != 0) {
                     // use the index of array to get char ascii code
@@ -90,9 +102,6 @@ int main() {
                 }
             }
             
-            int indexOfWinning = findSmallest(scoringTable, 1);
-            int valAtIndex = scoringTable[indexOfWinning][1];
-
             char winningTeam = (char)findSmallest(scoringTable, 1) + 65;
             cout << "The winning team is team " << winningTeam << endl;
         }
