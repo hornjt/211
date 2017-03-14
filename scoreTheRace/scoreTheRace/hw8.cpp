@@ -8,32 +8,6 @@
 #include <iostream>
 using namespace std;
 
-//bool greaterThan(int a, int b) {
-//    return a < b;
-//}
-//
-//bool lessThan(int a, int b) {
-//    return a < b;
-//}
-//
-//typedef int (*FUNC)(int, int);
-//
-//int findDifference(int array[26][2], int column,  *FUNC) {
-//    int min = 0;
-//    
-//    // find the first non zero
-//    if (array[0][column] == 0)
-//        while (array[min][0] == 0)
-//            min++;
-//    
-//    // find smallest non zero
-//    for (int i = 0; i < 26; i++)
-//        if (array[i][column] != 0 && *func(array[i][column], array[min][column]))
-//            min = i;
-//    
-//    return min;
-//}
-
 // return smallest team size != 0
 // column represents whether we are testing the team score or number of team members
 int findSmallest(int array[26][2], int column) {
