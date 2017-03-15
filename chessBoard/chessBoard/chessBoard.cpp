@@ -46,21 +46,26 @@ void print(int board[], int numOfColumns, int numOfSolutions) {
     whiteQueen[1][1] = black;
     whiteQueen[1][3] = black;
     whiteQueen[1][5] = black;
-    for (int x = 1; x < 7; x++)
-        for (int y = 2; y < 4; y++)
+    for (int x = 2; x < 4; x++)
+        for (int y = 1; y < 6; y++)
             whiteQueen[x][y] = black;
     
     blackQueen[1][1] = " ";
     blackQueen[1][3] = " ";
     blackQueen[1][5] = " ";
-    for (int x = 1; x < 7; x++)
-        for (int y = 2; y < 4; y++)
+    for (int x = 2; x < 4; x++)
+        for (int y = 1; y < 6; y++)
             blackQueen[x][y] = " ";
     
     //fill board with pointers to blackBox and whiteBox in alternate positions
     for (i = 0; i < 8; ++i){        //for each row
         for (j = 0; j < 8; ++j){    //for each column
-            if ((i + j) % 2 == 0) chessBoard[i][j] = &whiteBox;
+            if ((i + j) % 2 == 0 && i == board[j])
+                chessBoard[i][j] = &whiteQueen;
+            else if ((i + j) % 2 == 0)
+                chessBoard[i][j] = &whiteBox;
+            else if (i == board[j])
+                chessBoard[i][j] = &blackQueen;
             else chessBoard[i][j] = &blackBox;
         }
     }
@@ -115,12 +120,11 @@ int main() {
     while (true) {
         while (column < boardSize) {
             if (!from_backtrack) {
-                
                 /*column section*/
                 board[column] = -1;
                 from_backtrack = true;
-                
             }
+            
             while (board[column] < boardSize){
                 /*row section*/
                 board[column]++;
@@ -136,12 +140,10 @@ int main() {
                     break;
                 }
             }
-            
         }
         print(board, boardSize, ++numOfSolutions) ;/*print section*/
         from_backtrack = true;
         backtrack(column);
-        cout << "Press ENTER to continue...";
         cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
     }
 }
