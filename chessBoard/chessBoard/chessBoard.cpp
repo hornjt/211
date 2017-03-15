@@ -34,6 +34,12 @@ void print(int board[], int numOfColumns, int numOfSolutions) {
     box blackBox, whiteBox, *chessBoard[8][8], whiteQueen, blackQueen;
     int i = 0, j = 0, k = 0, l = 0;
     
+    // print numbered version
+    cout << "Solution number " << numOfSolutions << " is: " << endl;
+    for (int i = 0; i < numOfColumns; i++)
+        cout << board[i] << " ";
+    cout << endl;
+    
     for (i = 0; i < 5; ++i){        //for each row
         for (j = 0; j < 7; ++j) {   //for each column
             whiteBox[i][j] = ' ';         //fill white (space char)
@@ -94,19 +100,7 @@ void print(int board[], int numOfColumns, int numOfSolutions) {
         cout<<string("\u2501");
     cout<<endl;
 }
-//    cout << "Solution number " << numOfSolutions << " is: " << endl;
-//    for (int i = 0; i < numOfColumns; i++)
-//        cout << board[i] << " ";
-//    cout << endl << endl;
-//    for (i = 0; i < numOfColumns; i++) {
-//        for (j = 0; j < numOfColumns; j++) {
-//            if (i == board[j])
-//                cout << "1 ";
-//            else cout << "0 ";
-//        }
-//        cout << endl;
-//    }
-//    cout << endl;
+
 
 int main() {
     
