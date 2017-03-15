@@ -42,26 +42,28 @@ void print(int board[], int numOfColumns, int numOfSolutions) {
     
     for (i = 0; i < 5; ++i){        //for each row
         for (j = 0; j < 7; ++j) {   //for each column
-            whiteBox[i][j] = ' ';         //fill white (space char)
-            whiteQueen[i][j] = ' ';       //fill white queen initially all white
+            whiteBox[i][j] = ' ';     //fill white (space char)
             blackBox[i][j] = black;   //fill black
-            blackQueen[i][j] = black;   //fill black queen initally all black
+            whiteQueen[i][j] = ' ';   //fill white queen initially all white
+            blackQueen[i][j] = black; //fill black queen initally all black
         }
     }
     
+    // crown of queens
     whiteQueen[1][1] = black;
     whiteQueen[1][3] = black;
     whiteQueen[1][5] = black;
-    for (int x = 2; x < 4; x++)
-        for (int y = 1; y < 6; y++)
-            whiteQueen[x][y] = black;
-    
     blackQueen[1][1] = " ";
     blackQueen[1][3] = " ";
     blackQueen[1][5] = " ";
-    for (int x = 2; x < 4; x++)
-        for (int y = 1; y < 6; y++)
+    
+    // queen body
+    for (int x = 2; x < 4; x++) {
+        for (int y = 1; y < 6; y++) {
+            whiteQueen[x][y] = black;
             blackQueen[x][y] = " ";
+        }
+    }
     
     //fill board with pointers to blackBox and whiteBox in alternate positions
     for (i = 0; i < 8; ++i){        //for each row
@@ -101,7 +103,6 @@ void print(int board[], int numOfColumns, int numOfSolutions) {
     cout<<endl;
 }
 
-
 int main() {
     
     int boardSize = 8, numOfSolutions = 0;
@@ -138,6 +139,6 @@ int main() {
         print(board, boardSize, ++numOfSolutions) ;/*print section*/
         from_backtrack = true;
         backtrack(column);
-        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+//        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );      keeps iTerm open
     }
 }
