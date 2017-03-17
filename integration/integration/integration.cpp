@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 //
 //  integration.cpp
 //  hw10
