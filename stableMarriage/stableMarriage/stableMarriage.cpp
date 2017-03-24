@@ -1,24 +1,15 @@
 //
-//  main.cpp
+//  stableMarriage.cpp
 //  stableMarriage
+//  HW 11
 //
 //  Created by Jon Horn on 3/21/17.
-//  Copyright © 2017 Jon Horn. All rights reserved.
 //
 
 #include <iostream>
 using namespace std;
 
 bool ok(int board[], int column){
-    
-    int board0 = board[0];
-    int board1 = board[1];
-    int board2 = board[2];
-    int board3 = board[3];
-    int board4 = board[4];
-    int board5 = board[5];
-    int board6 = board[6];
-    int board7 = board[7];
     
     static int manPref[3][3] = {
         {0,2,1},  // Man#0's preferences
