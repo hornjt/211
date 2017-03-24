@@ -57,9 +57,9 @@ int main(){
     
     int boardSize = 8, numOfSolutions = 0;
     /*board setup */
-    int board[boardSize], column = 0;
+    int board[8] = {0}, column = 0;
 
-    board[0] = 0;
+    //board[0] = 0;
     
     bool from_backtrack = false;
     while (true) {
