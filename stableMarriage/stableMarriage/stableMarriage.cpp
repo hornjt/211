@@ -34,7 +34,24 @@ bool ok(int board[], int column){
     
     int newMan = column, newWoman = board[column];
 
-    
+    for (int i = 0; i < column; ++i) {
+        int currentMan = i, currentWoman = board[i];
+        if (currentWoman == newWoman) // woman already married
+            return false;
+        
+        // current man prefers the new woman to his partner
+        if (manPref[currentMan][newWoman] < manPref[currentMan][currentWoman] &&
+            // new woman prefers the current man to her partner
+            womanPref[newWoman][currentMan] < womanPref[newWoman][newMan])
+            return false;
+        
+        // new man prefers the current woman to his partner
+        if (manPref[newMan][currentWoman] < manPref[newMan][newWoman] &&
+            // current woman prefers the new man to her partner
+            womanPref[currentWoman][newMan] < womanPref[currentWoman][currentMan])
+            return false;
+    }
+    return true;
 }
 
 void backtrack(int &col){
