@@ -36,8 +36,11 @@ int solveBoard(int boardSize) {
     bool from_backtrack = false;
     while (true) {
         while (column < boardSize) {
-            if (column == -1) // no more solutions for this size board
+            // no more solutions for this size board
+            if (column == -1) {
+                delete [] board; // delete memory allocation
                 return numOfSolutions;
+            }
             if (!from_backtrack) {
                 
                 /*column section*/
