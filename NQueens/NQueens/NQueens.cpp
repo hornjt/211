@@ -54,10 +54,16 @@ void print(int board[], int numOfColumns, int numOfSolutions) {
     cout << endl;
 }
 int main(){
+    int boardSize;
+    cout << "Enter board size";
+    cin >> boardSize;
+    int board[boardSize];
+    int numOfSolutions = 0;
+    int column = 0;
     
-    int boardSize = 8, numOfSolutions = 0;
+    //int boardSize = 8;
     /*board setup */
-    int board[8] = {0}, column = 0;
+    // int board[8] = {0};
 
     //board[0] = 0;
     
