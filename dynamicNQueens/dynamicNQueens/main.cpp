@@ -25,43 +25,19 @@ void backtrack(int &col){
     col--;
     if (col == -1) {
         //set stop point
-        exit(0);
+        return;
     }
-    
 }
-void print(int board[], int numOfColumns, int numOfSolutions) {
-    int i = 0, j = 0;
-    cout << "Solution number " << numOfSolutions << " is: " << endl;
-    for(int i = 0; i < numOfColumns; i++)
-        cout << board[i] << " ";
-    cout << endl << endl;
-    for (i = 0; i < numOfColumns; i++) {
-        for (j = 0; j < numOfColumns; j++) {
-            if (i == board[j])
-                cout << "1 ";
-            else cout << "0 ";
-        }
-        cout << endl;
-    }
-    cout << endl;
-}
-int main(){
-    int boardSize;
-    cout << "Enter board size";
-    cin >> boardSize;
-    int board[boardSize];
-    int numOfSolutions = 0;
-    int column = 0;
-    
-    //int boardSize = 8;
-    /*board setup */
-    // int board[8] = {0};
-    
-    //board[0] = 0;
+
+int solveBoard(int boardSize) {
+    int * board = new int[boardSize];
+    int numOfSolutions = 0, column = 0;
     
     bool from_backtrack = false;
     while (true) {
         while (column < boardSize) {
+            if (column == -1) // no more solutions for this size board
+                return numOfSolutions;
             if (!from_backtrack) {
                 
                 /*column section*/
@@ -84,10 +60,20 @@ int main(){
                     break;
                 }
             }
-            
         }
-        print(board, boardSize, ++numOfSolutions) ;/*print section*/
+        numOfSolutions++;
         from_backtrack = true;
         backtrack(column);
+    }
+}
+
+
+int main(){
+    int boardSize;
+    cout << "Enter board size you want to solve: " << endl;
+    cin >> boardSize;
+    for (int i = 1; i <= boardSize; i++) {
+        int solutions = solveBoard(i);
+        cout << "There are " << solutions << " solutions to the " << i << " queens problem" << endl;
     }
 }
