@@ -19,6 +19,8 @@ int main(){
         {3,7,2,8,6,4}
     };
     
+//    cout << (1 + 5 ) % 5 << endl;
+    
     int memo_cost[rows][cols]={0};
     
     //initialize first colum of memo_cost[][]
@@ -26,7 +28,26 @@ int main(){
     for (int i = 0; i < rows; i++)
         memo_cost[i][0] = weight[i][0];
     
-    //fill in rest colum of memo_cost[][]
+//    for (int i = 0; i < cols; i++) {
+//        for (int j = 0; j < rows; j++) {
+//            cout << weight[j][i];
+//        }
+//        cout << endl;
+//    }
+    
+    
+    
+//    fill in rest colum of memo_cost[][]
+    for (int i = 0; i < cols; i++) {
+        for (int j = 0; j < rows; j++) {
+            int above = weight[(j + 4) % 5 ][i];
+            int left = weight[j][i];
+            int below = weight[(j + 6) % 5 ][i];
+            
+            cout << "Row " << i << " column " << j + 1 << " has neighbors of " << above << left
+            << below << endl;
+        }
+    }
     
     // now find the smallest of them
     
@@ -41,7 +62,7 @@ int main(){
     
     //print route
     for(int i=0;i<cols;i++){
-        cout<<"route "<<i<<" is: "<<route[i]<<" row."<<endl;
+//        cout<<"route "<<i<<" is: "<<route[i]<<" row."<<endl;
     }
 //    cout<<"the shortest path is of length "<<min<<endl;
     return 0;
