@@ -6,6 +6,8 @@
 //
 
 #include<iostream>
+#include <algorithm>
+
 using namespace std;
 const int rows = 5;
 const int cols = 6;
@@ -28,24 +30,24 @@ int main(){
     for (int i = 0; i < rows; i++)
         memo_cost[i][0] = weight[i][0];
     
-//    for (int i = 0; i < cols; i++) {
-//        for (int j = 0; j < rows; j++) {
-//            cout << weight[j][i];
-//        }
-//        cout << endl;
-//    }
-    
-    
     
 //    fill in rest colum of memo_cost[][]
-    for (int i = 0; i < cols; i++) {
+    for (int i = 0; i < cols - 1; i++) {
         for (int j = 0; j < rows; j++) {
-            int above = weight[(j + 4) % 5 ][i];
-            int left = weight[j][i];
-            int below = weight[(j + 6) % 5 ][i];
+            int above = memo_cost[(j + 4) % 5][i];
+            int left = memo_cost[j][i];
+            int below = memo_cost[(j + 6) % 5][i];
             
-            cout << "Row " << i << " column " << j + 1 << " has neighbors of " << above << left
-            << below << endl;
+//            if (memo_cost[j][i + 1] == 0)
+            memo_cost[j][i + 1] = weight[j][i + 1] + min(above, min(left, below));
+//            else memo_cost[j][i + 1] = memo_cost[j][i + 1] + min(above, min(left, below));
+    
+            int stop = 0;
+            
+//            memo_cost[j][i + 1] =
+            
+//            cout << "Row " << i << " column " << j + 1 << " has neighbors of " << above << left << below << endl;
+        
         }
     }
     
