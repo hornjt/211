@@ -11,12 +11,19 @@
 using namespace std;
 const int rows = 5;
 const int cols = 6;
+int routeTotal = 0;
+int minRow = 0;
 
 int findShortest(int array[5][6], int row, int col) {
-    int above = array[(row + 4) % 5][col];
+    int above = array[(row + 4) % rows][col];
     int left = array[row][col];
-    int below = array[(row + 6) % 5][col];
-    return min(above, min(left, below));
+    int below = array[(row + 6) % rows][col];
+    int least = min(above, min(left, below));
+
+    for (int i = 0; i < rows; i++)
+        if (array[i][col] == least)
+            minRow = i;
+    return least;
 }
 
 int main(){
@@ -46,28 +53,27 @@ int main(){
         }
     }
     
-    
-    
     int route[cols]={-1};
     
-    int min = memo_cost[0][cols - 1];
     
     for (int i = 1; i < rows; i++) {
-        if (memo_cost[i][cols - 1] < memo_cost[i - 1][cols - 1])
-            min = i;
+        if (memo_cost[i][cols - 1] < memo_cost[i - 1][cols - 1]) {
+            minRow = i;
+        }
     }
     
-    route[cols-1]= memo_cost[min][cols - 1]; //find final step route.
+    route[cols-1]= memo_cost[minRow][cols - 1]; //find final step route.
     
     
-    for(int c=cols-1;c>=0;c--){// go backward to find route
-        route[c]= findShortest(memo_cost, );
+    for(int c=cols-2;c>=0;c--){// go backward to find route
+        route[c] = findShortest(memo_cost, minRow, c);
+        routeTotal += route[c];
     }
     
     //print route
     for(int i=0;i<cols;i++){
-//        cout<<"route "<<i<<" is: "<<route[i]<<" row."<<endl;
+        cout<<"route "<<i<<" is: "<<route[i]<<" row."<<endl;
     }
-//    cout<<"the shortest path is of length "<<min<<endl;
+    cout<<"the shortest path is of length "<<routeTotal<<endl;
     return 0;
 }
