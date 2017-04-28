@@ -10,6 +10,7 @@
 using namespace std;
 const int rows = 5;
 const int cols = 6;
+static int memo[rows][cols] = {0};
 
 int cost(int i, int j){ // i is the row, j is the column
     int weight[rows][cols]={
@@ -29,11 +30,11 @@ int cost(int i, int j){ // i is the row, j is the column
     int down = weight[i][j] + cost((i + 6) % rows, j - 1);
     
     // find the value of the shortest path through cell (i,j)
-    int min = _________
+    int minPath = min(left, min(up, down));
+    if (memo[i][j] == 0)
+        memo[i][j] = minPath;
     
-    …some code goes here
-    
-    return min;
+    return memo[i][j];
 }
 
 int main(){
@@ -44,12 +45,18 @@ int main(){
         ex[i]=cost(i,cols-1);
     
     // now find the smallest of them
-    int min= ;
+    int minValue = ex[0];
+    int minRow = 0;
     
-    …some code goes here
+    for (int i = 1; i < rows; i++) {
+        if (ex[i] < ex[i - 1]) {
+            minValue = ex[i];
+            minRow = i;
+        }
+    }
     
-    cout<<"the sortest path is of length "<<min<<endl;
-    system("PAUSE");
+    cout<<"the shortest path is of length "<<ex[minRow]<<endl;
+    
     return EXIT_SUCCESS;
     
 }
