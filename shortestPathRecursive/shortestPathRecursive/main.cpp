@@ -45,12 +45,10 @@ int main(){
         ex[i]=cost(i,cols-1);
     
     // now find the smallest of them
-    int minValue = ex[0];
     int minRow = 0;
     
     for (int i = 1; i < rows; i++) {
         if (ex[i] < ex[i - 1]) {
-            minValue = ex[i];
             minRow = i;
         }
     }
