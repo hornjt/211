@@ -53,7 +53,7 @@ int main(){
         }
     }
     
-    int route[cols]={-1};
+    int route[cols] = {-1};
     
     
     for (int i = 1; i < rows; i++) {
@@ -74,6 +74,6 @@ int main(){
     for(int i=0;i<cols;i++){
         cout<<"route "<<i<<" is: "<<route[i]<<" row."<<endl;
     }
-    cout<<"the shortest path is of length "<<routeTotal<<endl;
+    cout<<"the shortest path is of length "<<route[5]<<endl;
     return 0;
 }
